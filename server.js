@@ -281,8 +281,10 @@ app.put("/api/marks", auth, teacherOnly, (req, res) => {
 
 app.get("/api/health", (req, res) => res.json({ ok: true, database: "sqlite", time: new Date().toISOString() }));
 
-app.get(/.*/, (req, res) => res.sendFile(path.join(__dirname, "public", "index.html")));
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
-app.listen(PORT, () => {
-  console.log(`AI Attendance Ledger running at http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`AI Attendance Ledger running on port ${PORT}`);
 });
